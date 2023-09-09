@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { nanoid } from 'nanoid';
 import {
@@ -147,12 +147,15 @@ export const App = () => {
     setIsError(false);
   };
 
-  const onBackToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  };
+  const btnRef = useRef();
+
+  useLayoutEffect(() => {
+    if (page > 1) {
+      const { height } = btnRef.current.getBoundingClientRect();
+
+      window.scrollBy({ top: height + 24, behavior: 'smooth' });
+    }
+  });
 
   return (
     <Layout>
@@ -166,7 +169,11 @@ export const App = () => {
       )}
 
       {images.length > 0 && (
-        <ImageGallery images={images} onOpenModal={onOpenModal} />
+        <ImageGallery
+          images={images}
+          onOpenModal={onOpenModal}
+          btnRef={btnRef}
+        />
       )}
 
       {isLastPage && (
@@ -187,7 +194,7 @@ export const App = () => {
         openImage={openImage}
       />
 
-      {query && <ToTopButton onBackToTop={onBackToTop} />}
+      {query && <ToTopButton />}
 
       {isError && <Error />}
 

@@ -1,15 +1,11 @@
-import PropTypes from 'prop-types';
 import { BsChevronUp } from 'react-icons/bs';
-import { ButtonTop } from './ToTopBtn.styled';
+import { ScrollToTopBtn } from './ToTopBtn.styled';
 
-export const ToTopButton = ({ onBackToTop }) => {
+export const ToTopButton = () => {
   return (
-    <ButtonTop type="button" onClick={onBackToTop}>
-      <BsChevronUp size={72} />
-    </ButtonTop>
+    <ScrollToTopBtn
+      smooth
+      component={<BsChevronUp size={24} strokeWidth={1} />}
+    />
   );
-};
-
-ToTopButton.propTypes = {
-  onBackToTop: PropTypes.func.isRequired,
 };

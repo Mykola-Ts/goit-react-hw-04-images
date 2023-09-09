@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import ScrollToTop from 'react-scroll-to-top';
 
-export const ButtonTop = styled.button`
+export const ScrollToTopBtn = styled(ScrollToTop)`
   position: fixed;
   bottom: 30px;
   right: 30px;
